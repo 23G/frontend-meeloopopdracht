@@ -12,9 +12,14 @@
         "lint": "npm run lint:js && npm run lint:style"
     },
     "dependencies": {
+        "@babel/plugin-transform-flow-strip-types": "^7.14.5",
+        "@babel/plugin-transform-typescript": "^7.15.0",
+        "cookie": "^0.4.1",
         "core-js": "^3.16.2",
+        "js-cookie": "^3.0.0",
         "loader-utils": "^2.0.0",
-        "nuxt": "^2.15.8"
+        "nuxt": "^2.15.8",
+        "vuex-persistedstate": "^4.0.0"
     },
     "devDependencies": {
         "@babel/eslint-parser": "^7.15.0",
