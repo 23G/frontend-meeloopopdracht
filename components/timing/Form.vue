@@ -156,6 +156,10 @@ export default defineComponent({
   methods: {
     resetForm() {
       this.$v.$reset()
+      
+      this.error = undefined
+      this.success = undefined
+
       this.form = {
         id: undefined,
         laptime: undefined,

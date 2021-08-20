@@ -51,7 +51,7 @@
             temporary
             fixed
         >
-            <TimingForm />
+            <TimingForm ref="Form" />
         </v-navigation-drawer>
 
         <v-footer app>
@@ -83,5 +83,12 @@ export default {
             },
         ],
     }),
+    watch: {
+        drawer(value) {
+            // Reset the form after close
+            if (!value)
+                this.$refs.Form?.resetForm()
+        },
+    },
 }
 </script>
