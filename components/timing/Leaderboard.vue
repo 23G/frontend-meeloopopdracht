@@ -60,8 +60,10 @@ export default defineComponent({
 
       // Map the fastest lap per user
       for (const user of this.users) {
-        // Find all laps made by the current user
-        const laps = this.timings.filter((timing: ITiming) => timing.userId === user.id).map((timing: ITiming) => timing)
+        // Find all laps made by the current user and sort by most recent
+        const laps = this.timings.filter((timing: ITiming) => timing.userId === user.id)
+          .map((timing: ITiming) => timing)
+          .sort((a, b) => a.datetime > b.datetime ? -1 : 1)
         if (!laps.length) continue
 
         // Get the fastest lap the current user made
