@@ -30,10 +30,10 @@
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
 import { DataTableHeader } from 'vuetify'
-import { ITiming, IUser, TTimingList, TUserList } from '~/types'
+import { ITiming, TTimingList, TUserList } from '~/types'
 
 export default defineComponent({
-  name: 'TimingListing',
+  name: 'TimingLeaderboard',
   data: () => ({
     search: '',
     headers: [
@@ -50,11 +50,18 @@ export default defineComponent({
       return this.$store.state.users.users
     },
     items() {
-      return this.timings.map((timing: ITiming) => {
-        const user = this.users.find((user: IUser) => user.id === timing.userId)
+      const userTimings: { [key: number]: ITiming } = {}
 
-        if (!user) return { ...timing, user: undefined }
+      // Map the fastest lap per user
+      for (const user of this.users) {
+        // Find all laps made by the current user
+        const laps = this.timings.filter((timing: ITiming) => timing.userId === user.id).map((timing: ITiming) => timing)
+        if (!laps.length) continue
 
+        // Get the fastest lap the current user made
+        const fastestLap = laps.reduce((res, obj) => (obj.laptime < res.laptime) ? obj : res)
+
+        // Create a string of the user's full name
         let fullname = user.first_name
 
         if (user.last_name_prefix)
@@ -62,11 +69,13 @@ export default defineComponent({
 
         fullname = `${fullname} ${user.last_name}`
 
-        return {
-          ...timing,
-          user: fullname
+        userTimings[user.id] = {
+          ...fastestLap,
+          user: fullname,
         }
-      })
+      }
+
+      return Object.values(userTimings)
     },
   },
   async beforeMount() {
