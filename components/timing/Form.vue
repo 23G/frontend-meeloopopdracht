@@ -154,9 +154,7 @@ export default defineComponent({
       this.form.datetime = new Date().toISOString()
   },
   methods: {
-    resetForm() {
-      this.$v.$reset()
-      
+    resetForm() {      
       this.error = undefined
       this.success = undefined
 
@@ -164,8 +162,9 @@ export default defineComponent({
         id: undefined,
         laptime: undefined,
         userId: undefined,
-        datetime: undefined,
       }
+
+      this.$v.$reset()
     },
     async onSubmit() {
       this.error = undefined
@@ -176,6 +175,10 @@ export default defineComponent({
 
       // Prepare the payload
       const payload: IForm = { ...this.form }
+
+      // Set time to now if we're creating a new timing
+      if (!this.timing)
+        payload.datetime = new Date().toISOString()
 
       // Are we updating or adding a timing?
       const promise = this.timing ? 'timings/updateTiming' : 'timings/addTiming'
