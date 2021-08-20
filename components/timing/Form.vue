@@ -109,6 +109,7 @@ export default defineComponent({
       return this.$store.state.users.users
     },
     userOptions(): Array<{ text: string, value: IUser['id'] }> {
+      // Map text and value properties or users for use in v-select
       return this.users.map((user: IUser) => {
         let fullname = user.first_name
 
@@ -124,6 +125,7 @@ export default defineComponent({
       })
     },
     laptimeErrors() {
+      // Error messages for laptime input
       const errors: Array<string> = []
 
       if (!this.$v.form.laptime?.$dirty) return errors
@@ -133,6 +135,7 @@ export default defineComponent({
       return errors
     },
     userIdErrors() {
+      // Error messages for user input
       const errors: Array<string> = []
 
       if (!this.$v.form.userId?.$dirty) return errors
@@ -167,6 +170,7 @@ export default defineComponent({
       this.$v.$reset()
     },
     async onSubmit() {
+      // Unset error and success messages
       this.error = undefined
       this.success = undefined
 

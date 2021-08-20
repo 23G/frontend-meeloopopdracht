@@ -55,7 +55,7 @@ export default defineComponent({
     users(): TUserList {
       return this.$store.state.users.users
     },
-    items() {
+    items(): { [key: number]: any } {
       const userTimings: { [key: number]: any } = {}
 
       // Map the fastest lap per user

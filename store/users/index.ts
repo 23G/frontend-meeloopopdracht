@@ -17,6 +17,7 @@ export const mutations: MutationTree<RootState> = {
 
 export const actions: ActionTree<RootState, RootState> = {
   async fetchUsers({ commit }): Promise<TUserList | []> {
+    // Set global loading state
     commit('setLoading', true, { root: true })
 
     try {

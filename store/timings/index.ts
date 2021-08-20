@@ -67,6 +67,7 @@ export const mutations: MutationTree<RootState> = {
 
 export const actions: ActionTree<RootState, RootState> = {
   async addTiming({ commit }, payload: ITiming) {
+    // Set global loading state
     commit('setLoading', true, { root: true })
 
     try {
@@ -80,6 +81,7 @@ export const actions: ActionTree<RootState, RootState> = {
     }
   },
   async deleteTiming({ commit }, id: ITiming) {
+    // Set global loading state
     commit('setLoading', true, { root: true })
 
     try {
@@ -93,6 +95,7 @@ export const actions: ActionTree<RootState, RootState> = {
     }
   },
   async updateTiming({ commit }, payload: ITiming) {
+    // Set global loading state
     commit('setLoading', true, { root: true })
 
     try {
