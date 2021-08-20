@@ -40,5 +40,11 @@
         "first_name": "Piet",
         "last_name": "Jensen",
         "last_name_prefix": ""
+    },
+    {
+        "id": 8,
+        "first_name": "Dennis",
+        "last_name": "Vries",
+        "last_name_prefix": "de"
     }
 ]
