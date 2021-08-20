@@ -56,7 +56,8 @@ export default defineComponent({
       return this.$store.state.users.users
     },
     items() {
-      return this.timings.map((timing: ITiming) => {
+      // Set as any to elimate false positive
+      return (this.timings as any).map((timing: ITiming) => {
         const user = this.users.find((user: IUser) => user.id === timing.userId)
 
         if (!user) return { ...timing, user: undefined }
