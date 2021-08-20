@@ -7,6 +7,12 @@
   <client-only>
     <v-card>
       <v-card-title>
+        <v-toolbar-title>
+          Leaderboard
+        </v-toolbar-title>
+
+        <v-spacer />
+
         <v-text-field
           v-model="search"
           append-icon="mdi-magnify"
