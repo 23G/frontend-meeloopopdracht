@@ -1,10 +1,10 @@
 import { IUser, TISOString } from "~/types";
 
 export interface ITiming {
-  id: number
+  id?: number
+  laptime: number
   userId: IUser['id']
   datetime: TISOString
-  laptime: number
 }
 
 export type TTimingList = Array<ITiming>

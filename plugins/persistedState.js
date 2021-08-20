@@ -4,7 +4,7 @@ import cookie from 'cookie'
 
 export default ({ store, req }) => {
   createPersistedState({
-    paths: undefined, // persist complete state
+    paths: ['timings'], // only persist states of these modules
     storage: {
       getItem: (key) => {
         if (process.server) {

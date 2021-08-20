@@ -8,6 +8,20 @@
             <NuxtLink to="/">
                 <Logo23GLogo />
             </NuxtLink>
+
+            <v-spacer />
+
+            <v-chip
+                title="Toggle laptime form"
+                color="primary"
+                text-color="white"
+                @click.stop="drawer = !drawer"
+            >
+                New laptime
+                <v-icon right>
+                    mdi-timeline-plus
+                </v-icon>
+            </v-chip>
         </v-app-bar>
 
         <v-navigation-drawer permanent app clipped>
@@ -31,6 +45,15 @@
             </v-container>
         </v-main>
 
+        <v-navigation-drawer
+            v-model="drawer"
+            right
+            temporary
+            fixed
+        >
+            <TimingForm />
+        </v-navigation-drawer>
+
         <v-footer app>
             <span>&copy; {{ new Date().getFullYear() }}</span>
         </v-footer>
@@ -41,10 +64,12 @@
 export default {
     name: 'LayoutDefault',
     components: {
-        'Logo23GLogo': () => import('~/components/logo/23GLogo.vue')
+        'Logo23GLogo': () => import('~/components/logo/23GLogo.vue'),
+        'TimingForm': () => import('~/components/timing/Form.vue')
     },
     data: () => ({
         fixed: true,
+        drawer: false,
         items: [
             {
                 icon: 'mdi-view-list-outline',

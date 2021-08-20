@@ -15,14 +15,17 @@ export const mutations: MutationTree<RootState> = {
   },
   addTiming(state, timing: ITiming) {
     // First, check if it already exists
-    const exists = state.timings.includes(timing)
+    const index = state.timings.findIndex(({ id, userId, laptime, datetime }) => {
+      // A timing exists if ID's are equal or userId, laptime and datetime are equal
+      return timing.id === id || (timing.userId === userId && timing.laptime === laptime && timing.datetime === datetime)
+    })
 
     // If it exists, do nothing
-    if (exists) return
+    if (index > -1) throw new Error('Timing already exists.')
 
     // NEVER modify the state directly
     // Add the new timing to the list
-    const newList = [...state.timings, timing]
+    const newList = [...state.timings, { ...timing, id: state.timings.length + 1 }]
 
     // Update state
     state.timings = newList
@@ -32,7 +35,7 @@ export const mutations: MutationTree<RootState> = {
     const index = state.timings.findIndex((timing: ITiming) => timing.id === id)
 
     // If it does not exist, do nothing
-    if (index === -1) return
+    if (index === -1) throw new Error('Timing does not exist.')
 
     // NEVER modify the state directly
     const newList = [...state.timings]
@@ -49,7 +52,7 @@ export const mutations: MutationTree<RootState> = {
     const index = state.timings.findIndex(({ id }: ITiming) => timing.id === id)
 
     // If it does not exist, do nothing
-    if (index === -1) return
+    if (index === -1) throw new Error('Timing does not exist.')
 
     // NEVER modify the state directly
     const newList = [...state.timings]
@@ -63,20 +66,43 @@ export const mutations: MutationTree<RootState> = {
 }
 
 export const actions: ActionTree<RootState, RootState> = {
-  // async fetchTimings({ commit }): Promise<TTimingList | []> {
-  //   commit('setLoading', true, { root: true })
+  async addTiming({ commit }, payload: ITiming) {
+    commit('setLoading', true, { root: true })
 
-  //   try {
-  //     // Simulate fetching data from API
-  //     const data = await require('~/static/json/timings.json')
+    try {
+      // Simulate API call
+      await commit('addTiming', payload)
+      return payload
+    } catch (error) {
+      throw new Error(error.message)
+    } finally {
+      commit('setLoading', false, { root: true })
+    }
+  },
+  async deleteTiming({ commit }, id: ITiming) {
+    commit('setLoading', true, { root: true })
 
-  //     commit('setTimings', data)
+    try {
+      // Simulate API call
+      await commit('deleteTiming', id)
+      return true
+    } catch (error) {
+      throw new Error(error.message)
+    } finally {
+      commit('setLoading', false, { root: true })
+    }
+  },
+  async updateTiming({ commit }, payload: ITiming) {
+    commit('setLoading', true, { root: true })
 
-  //     return data
-  //   } catch (error) {
-  //     return []
-  //   } finally {
-  //     commit('setLoading', false, { root: true })
-  //   }
-  // },
+    try {
+      // Simulate API call
+      await commit('updateTiming', payload)
+      return payload
+    } catch (error) {
+      throw new Error(error.message)
+    } finally {
+      commit('setLoading', false, { root: true })
+    }
+  },
 }
