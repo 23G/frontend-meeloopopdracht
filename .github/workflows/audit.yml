@@ -1,0 +1,9 @@
+name: Audit
+on:
+    pull_request:
+        branches: [main, develop]
+    push:
+        branches: [main, develop]
+jobs:
+    audit:
+        uses: 23g/actions/.github/workflows/audit-npm.yml@v2

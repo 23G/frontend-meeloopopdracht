@@ -28,6 +28,6 @@ Zoals je inmiddels wel gezien hebt hebben we een mooie racesimulator op kantoor 
 
 ### Nice to have
 
--   Tailwind gebruiken (de setup is al gedaan).
+-   Tailwind gebruiken
 -   Werken met Pull Requests.
 -   Filteren en sorteren.
